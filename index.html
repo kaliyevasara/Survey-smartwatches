@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap" rel="stylesheet">
+
+  <title>AI vs Traditional — Home</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Scripts -->
+  <script type="module" src="./index.js" defer></script>
+  <style>
+    
+/* Default: hide hamburger on large screens */
+.nav-toggle {
+  display: none;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.headline{
+    text-align: center;
+}
+.card-title {
+  font-weight: 700; 
+}
+
+
+/* Mobile screens */
+@media (max-width: 900px) {
+  /* Navigation links */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;   
+    height: 100vh;   
+    background: var(--bg);
+    padding: 60px 20px 20px;
+    z-index: 100;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  /* When menu is open */
+  .nav-links.show {
+    transform: translateX(0);
+    display: flex;
+  }
+
+  .nav-links .nav-btn {
+    margin-bottom: 20px;
+    font-size: 1.2rem; 
+  }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: flex;           
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32px;
+    height: 26px;
+    background: transparent; 
+    border: none;             
+    padding: 0;               
+    margin: 0;             
+    cursor: pointer;
+    z-index: 110;
+    outline: none;            
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 100%;              
+    height: 4px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Cross animation on click */
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr; 
+    gap: 20px;
+  }
+  .product-card .card-image {
+    width: 100%;      
+    height: auto;      
+    max-width: 400px;  
+    margin: 0 auto;   
+  }
+}
+  </style>
+</head>
+
+<body>
+  <div class="site-root">
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="brand">
+          <div class="logo">
+            <img src="/assets/images/logo.png" alt="AI vs Traditional Logo" class="brand-logo" />
+          </div>
+          <div class="brand-title">AI vs Traditional</div>
+        </div>
+
+    <button class="nav-toggle" id="navToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+        <div class="nav-links" id="navLinks">
+          <button class="nav-btn" id="homeBtn">Home</button>
+          <button class="nav-btn" id="compareBtn">Compare</button>
+          <button class="nav-btn" id="surveyBtn">Survey</button>
+          <button class="nav-btn" id="resultBtn">Results</button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+    <!-- Hero -->
+    <header class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-left reveal" data-anim="fade-in" data-delay="0">
+          <h1 class="headline">Compare AI-powered vs traditional watches</h1>
+          <p class="lead">Discover how AI-powered Galaxy Watch 8 stand apart from classic Galaxy Watch 3 through a clear, side-by-side comparison designed to highlight real features and measurable differences.</p>
+          <div class="hero-ctas">
+            <button class="btn primary" id="ctaCompare">
+              Start comparison <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="card-grid">
+            <article class="product-card tilt reveal" data-anim="scale-in" data-delay="150" data-tilt>
+              <div class="badge neutral">Classic</div>
+              <div class="media">
+                <img src="/assets/images/watch3.jpg" alt="Non-AI sample" class="card-image" />
+              </div>
+              <div class="card-title">Galaxy Watch 3</div>
+            </article>
+
+            <article class="product-card tilt reveal" data-anim="scale-in" data-delay="250" data-tilt>
+              <div class="badge accent">AI-powered</div>
+              <div class="media">
+                <img src="/assets/images/watch8.jpg" alt="AI sample" class="card-image" />
+              </div>
+              <div class="card-title">Galaxy Watch 8</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Features -->
+<section class="features section">
+  <div class="container features-grid">
+
+    <div class="feature reveal" data-anim="fade-up" data-delay="0">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-icon">
+        <path d="M12 8V4H8"/>
+        <rect width="16" height="12" x="4" y="8" rx="2"/>
+        <path d="M2 14h2"/>
+        <path d="M20 14h2"/>
+        <path d="M15 13v2"/>
+        <path d="M9 13v2"/>
+    </svg>
+      </div>
+      <h3>AI-powered health tracking</h3>
+      <p>Galaxy Watch 8 automatically monitors heart rate, sleep, and activity trends with smart insights and alerts in real time.</p>
+    </div>
+
+    <div class="feature reveal" data-anim="fade-up" data-delay="120">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-watch-icon">
+        <path d="M12 10v2.2l1.6 1"/>
+        <path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/>
+        <path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/>
+        <circle cx="12" cy="12" r="6"/>
+    </svg>
+      </div>
+      <h3>Classic monitoring</h3>
+      <p>Galaxy Watch 3 tracks metrics manually or at fixed intervals, giving reliable but less adaptive data without predictive insights.</p>
+    </div>
+
+    <div class="feature reveal" data-anim="fade-up" data-delay="240">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter-icon">
+        <path d="m9 11-6 6v3h9l3-3"/>
+        <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/>
+        </svg>
+      </div>
+      <h3>Performance comparison</h3>
+      <p>Side-by-side evaluation highlights differences in responsiveness, feature automation, and the accuracy of health metrics.</p>
+    </div>
+  </div>
+</section>
+
+    <!-- CTA -->
+    <section class="cta section">
+      <div class="container text-center reveal" data-anim="fade-up" data-delay="0">
+        <h2>Ready to explore?</h2>
+        <p class="muted">Start your detailed comparison and discover which approach fits your needs.</p>
+        <div class="hero-ctas">
+          <button class="btn primary" id="ctaCompare2">Start detailed comparison →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container text-center muted">© 2026 AI vs Classic - Compare AI-powered vs Classic Galaxy Watches</div>
+    </footer>
+  </div>
+</body>
+</html>
+
+

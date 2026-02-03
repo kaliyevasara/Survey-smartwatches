@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  <title>Survey Questionnaire – Smartwatch AI vs Non-AI</title>
+
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./survey.js" defer></script>
+
+  <style>
+    body {
+      background: #f8fafc;
+      color: #1e293b;
+      font-family: "Inter", sans-serif;
+      margin: 0;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255,255,255,0.9);
+      border-bottom: 1px solid #e2e8f0;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: flex-start;
+      padding: 14px 24px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .btn {
+      background: #e94057;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover { background: #d82d4c; }
+
+    .survey-header {
+      text-align: center;
+      margin-top: 120px;
+      margin-bottom: 40px;
+    }
+
+    .survey-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .survey-header p { color: #64748b; }
+
+    form {
+      max-width: 1000px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      padding: 40px 50px;
+      margin: 40px auto;
+    }
+
+    section.question-group {
+      margin-bottom: 50px;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      border-left: 6px solid #e94057;
+      padding-left: 10px;
+      color: #0f172a;
+    }
+
+    label { font-weight: 500; display:block; margin-bottom:6px; }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: #f9fafb;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .radio-group label {
+      background: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .radio-group label:hover {
+      border-color: #e94057;
+      background: #fff;
+    }
+    .radio-group input { accent-color: #e94057; }
+
+    .scale-note { 
+      font-size: 0.9rem; 
+      color: #64748b; 
+      margin-bottom: 10px; 
+    }
+
+    .rating-scale {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 16px;
+    }
+    .rating-scale label { text-align: center; font-size: 0.9rem; }
+
+    .thankyou {
+      text-align: center;
+      padding: 80px 20px;
+      display: none;
+    }
+    .thankyou.active {
+      display: block;
+      animation: fade-in 0.6s ease both;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <button class="btn" id="backCompare" style="background:#64748b;">← Back to Comparison</button>
+    </div>
+  </nav>
+
+  <div class="survey-header">
+    <h1>Survey Questionnaire</h1>
+    <p>Consumer Willingness to Pay: Non-AI vs AI Smartwatch</p>
+  </div>
+
+  <form id="surveyForm">
+
+    <!-- Section 1: Device Usage & Awareness -->
+    <section class="question-group">
+      <h2>Section 1: Device Usage & Awareness</h2>
+      <div id="deviceUsage"></div>
+    </section>
+
+    <!-- Section 2A: Samsung Galaxy Watch 3 -->
+    <section class="question-group">
+      <h2>Section 2A: Samsung Galaxy Watch 3 (Standard)</h2>
+      <p><b>Please read carefully:</b> <i>Imagine two smartwatches, Samsung Galaxy Watch 3 and Samsung Galaxy Watch 8. They are identical in design, hardware, and brand reputation. The ONLY difference is that Samsung Galaxy Watch 8 includes an integrated AI system.</i></p>
+      <p><i><b>Features:</b> Heart rate, step counting, basic sleep duration.</i></p>
+      <div id="watch3"></div>
+    </section>
+
+    <!-- Section 2B: Samsung Galaxy Watch 8 -->
+    <section class="question-group">
+      <h2>Section 2B: Samsung Galaxy Watch 8 (AI-powered)</h2>
+      <p><b>Please read carefully:</b> <i>Imagine two smartwatches, Samsung Galaxy Watch 3 and Samsung Galaxy Watch 8. They are identical in design, hardware, and brand reputation. The ONLY difference is that Samsung Galaxy Watch 8 includes an integrated AI system.</i></p>
+      <p><i><b>Features:</b> Everything in Samsung Galaxy Watch 3 + AI coaching, Energy Score, and proactive health alerts.</i></p>
+      <div id="watch8"></div>
+    </section>
+
+    <!-- Section 3: Willingness to Pay (WTP) -->
+    <section class="question-group">
+      <h2>Section 3: Willingness to Pay (WTP)</h2>
+      <div id="wtp"></div>
+    </section>
+
+    <!-- Section 4: Factors Influencing Extra Payment -->
+    <section class="question-group">
+      <h2>Section 4: Factors Influencing Extra Payment</h2>
+      <p><i>Please indicate how much each factor would influence your willingness to pay extra for the Galaxy Watch 8.</i></p>
+      <div id="factors"></div>
+    </section>
+
+    <!-- Section 5: Pricing and Choice -->
+    <section class="question-group">
+      <h2>Section 5: Pricing and Choice</h2>
+      <div id="pricing"></div>
+    </section>
+
+    <!-- Section 6: Demographics -->
+    <section class="question-group">
+      <h2>Section 6: Demographics</h2>
+      <div id="demographics"></div>
+    </section>
+
+    <div class="text-center">
+      <button class="btn" type="submit">Submit Survey →</button>
+    </div>
+  </form>
+
+  <div class="thankyou" id="thankYou">
+    <h2>🎉 Thank you for completing the survey!</h2>
+    <p>Your feedback helps us understand consumer preferences for AI vs non-AI smartwatches.</p>
+    <button class="btn" id="goHome">Return to Home</button>
+  </div>
+</body>
+</html>

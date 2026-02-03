@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comparison — Galaxy Watch 3 vs Galaxy Watch 8</title>
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./compare.js" defer></script>
+
+  <style>
+
+.nav {
+  top: 0;
+  z-index: 200;
+  background: var(--bg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.text-center .lead {
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.compare-section {
+  padding: 40px 0;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.compare-card {
+  padding: 24px;
+  background: var(--card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.compare-card h3 {
+  margin-bottom: 14px;
+}
+
+.compare-card ul {
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.compare-card.accent {
+  border-color: var(--accent);
+}
+.compare-card.accent:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.ai-photo-block {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-top: 40px;
+}
+
+.ai-photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ai-feature-img {
+  width: 100%;
+  max-width: 800px;  
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  margin-left: auto;   
+  margin-right: auto; 
+}
+
+.ai-photo-text {
+  margin-top: 20px;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  max-width: 900px;       
+  text-align: justify;    
+  text-justify: inter-word;
+  hyphens: auto;         
+  color: var(--text-color);
+}
+
+.table-compare {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-compare th, .table-compare td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: left;
+}
+
+/* Photo gallery */
+.photo-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.main-photo img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.photo-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.photo-thumbs img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.photo-thumbs img:hover {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .compare-grid,
+  .photo-compare-grid {
+  grid-template-columns: 1fr;
+}
+/* Navigation links */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: fixed; 
+  top: 0;
+  right: 0;
+  width: 50vw;     
+  height: 100vh;   
+  background: var(--bg);
+  padding: 60px 20px 20px;
+  z-index: 100;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+/* When menu is open */
+.nav-links.show {
+  transform: translateX(0); 
+  display: flex;
+}
+
+.nav-links .nav-btn {
+  margin-bottom: 20px;
+  font-size: 1.2rem; 
+}
+
+/* Hamburger */
+.nav-toggle {
+  display: flex;          
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 26px;
+  background: transparent;   
+  border: none;              
+  padding: 0;                
+  margin: 0;                
+  cursor: pointer;
+  z-index: 110;
+  outline: none;             
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;              
+  height: 4px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Cross animation on click */
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="site-root">
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="brand">
+          <div class="logo">
+            <img src="/assets/images/logo.png" alt="AI vs Traditional Logo" class="brand-logo" />
+          </div>
+          <div class="brand-title">AI vs Traditional</div>
+        </div>
+
+    <button class="nav-toggle" id="navToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <button class="nav-btn" id="homeBtn">Home</button>
+      <button class="nav-btn" id="compareBtn">Compare</button>
+      <button class="nav-btn" id="surveyBtn">Survey</button>
+      <button class="nav-btn" id="resultBtn">Results</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<!-- HERO -->
+<header class="hero section">
+  <div class="container text-center">
+    <h1 class="headline">Galaxy Watch 3 vs Galaxy Watch 8 (AI-powered)</h1>
+    <p class="lead">
+      A clear, structured comparison between the classic Galaxy Watch 3 and the AI-enhanced Galaxy Watch 8.
+    </p>
+    </div>
+</header>
+
+<!-- SPECIFICATION OVERVIEW -->
+<section class="compare-section">
+  <div class="container">
+    <h2>1. Specifications Overview</h2>
+      <table class="table-compare">
+        <tr>
+          <th>Category</th>
+          <th>Galaxy Watch 3</th>
+          <th>Galaxy Watch 8 (AI)</th>
+        </tr>
+        <tr>
+          <td>Display</td>
+          <td>Super AMOLED, 1.2″ or 1.4″ depending on model, 360×360 resolution.</td>
+          <td>Super AMOLED, 1.34″ (40mm) or 1.47″ (44mm), 438×438 or 480×480 resolution, up to 3000 nits brightness.</td>
+        </tr>
+        <tr>
+          <td>Sensors</td>
+          <td>Standard: accelerometer, gyroscope, barometer, heart rate sensor, SpO₂, ECG (limited by region).</td>
+          <td>Accelerometer, Barometer, Gyroscope, Compass, Temperature Sensor (infrared), Optical Heart Sensor, Electrical Heart Sensor, BioActive Sensor (BIA).</td>
+        </tr>
+        <tr>
+          <td>AI Features</td>
+          <td>None - GW3 uses classic tracking without AI-based insights.</td>
+          <td>Full AI Feature Set:
+            <ul>
+              <li>Sleep AI: Bedtime Guidance, Sleep Coaching</li>
+              <li>Stress AI analysis</li>
+              <li>Vascular Load</li>
+              <li>Real-time pattern learning</li>
+              <li>Predictive heart rate and alerts</li>
+            </ul>
+          </td>
+        </tr>
+    </table>
+  </div>
+</section>
+
+<!-- AI FEATURES -->
+<section class="compare-section">
+  <div class="container">
+    <h2>2. AI Features (Key Differences)</h2>
+      <div class="compare-grid">
+        <div>
+          <h3>Classic — Galaxy Watch 3</h3>
+          <ul>
+            <li>Manual or interval-based readings</li>
+            <li>No predictive analysis</li>
+            <li>No AI sleep or stress coaching</li>
+          </ul>
+        </div>
+        <div>
+          <h3>AI-powered — Galaxy Watch 8</h3>
+          <ul>
+            <li><b>Bedtime Guidance</b> - AI predicts your ideal sleep/wake timing based on circadian patterns and sleep history.</li>
+            <li><b>Sleep Coaching</b> - Multi-week coaching plan that analyzes your sleep patterns and provides personalized improvement tips.</li>
+            <li><b>Vascular Load</b> - AI analysis of vascular stiffness and pulse wave patterns during sleep, providing cardiovascular load insights.</li>
+            <li><b>ECG and Rhythm Notifications</b> - On-wrist ECG with automated irregular rhythm alerts powered by AI rhythm classification.</li>
+            <li><b>Energy Score</b> - Daily readiness level calculated from sleep, activity, stress, and recovery metrics using machine-learning models.</li>
+            <li><b>Running Coach (AI-enhanced)</b> - Real-time adaptive running feedback, personalized plans, and recommended intensities.</li>
+            <li><b>Medication Tracking</b> - Smart reminders based on habit prediction and adherence patterns.</li>
+            <li><b>Antioxidant Index</b> - AI interprets carotenoid measurements from skin to estimate antioxidant levels and lifestyle quality.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- AI FEATURE PHOTOS + DESCRIPTIONS -->
+<section class="compare-section">
+  <div class="container">
+    <h2>AI Features — Visual Examples</h2>
+
+    <div class="ai-photo-block">
+<!-- ITEM 1 -->
+  <div class="ai-photo-item">
+    <img src="/assets/images/watch8-running.jpg" alt="AI Running Coaching" class="ai-feature-img" />
+      <p class="ai-photo-text">
+        On the Galaxy Watch 8, Galaxy AI can generate a custom running plan based on your 12-minute fitness test. 
+        The watch also provides real-time feedback and adaptive coaching to help you stay on pace during a run.
+      </p>
+  </div>
+
+<!-- ITEM 2 -->
+  <div class="ai-photo-item">
+    <img src="/assets/images/watch8-antioxidant.jpg" alt="AI Antioxidant Measurement" class="ai-feature-img" />
+      <p class="ai-photo-text">
+        A new Antioxidant Index uses optical carotenoid measurements to estimate your dietary health and flag 
+        long-term risks such as metabolic or cardiovascular issues.
+      </p>
+  </div>
+
+<!-- ITEM 3 -->
+  <div class="ai-photo-item">
+    <img src="/assets/images/watch8-gemini.jpg" alt="Google AI Voice Assistant" class="ai-feature-img" />
+      <p class="ai-photo-text">
+        Google’s voice-powered AI Assistant can answer questions, send texts, and interact with Samsung apps such as 
+        Calendar, Clock, Samsung Health, and Reminders - all hands-free.
+      </p>
+  </div>
+
+<!-- ITEM 4 -->
+  <div class="ai-photo-item">
+    <img src="/assets/images/watch8-sleep.jpg" alt="AI Sleep Coach" class="ai-feature-img" />
+      <p class="ai-photo-text">
+        The Galaxy Watch 8’s AI Sleep Coach analyzes your schedule, free days, and biological circadian rhythm to determine 
+        your ideal bedtime and provide long-term sleep improvement guidance.
+      </p>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- FEATURE-BY-FEATURE -->
+<section class="compare-section">
+  <div class="container">
+    <h2>3. Feature-by-Feature Comparison</h2>
+
+  <div class="compare-grid">
+    <div class="compare-card accent">
+      <h3>Galaxy Watch 3</h3>
+      <ul>
+        <li>Standard heart rate monitoring</li>
+        <li>Fixed sleep tracking intervals</li>
+        <li>No prediction or adaptive algorithms</li>
+        <li>Manual adjustments required</li>
+        <li>Lacks contextual insights</li>
+      </ul>
+    </div>
+
+    <div class="compare-card accent">
+      <h3>Galaxy Watch 8 (AI)</h3>
+      <ul>
+        <li>AI-based heart & stress analytics</li>
+        <li>Adaptive sleep tracking with real-time adjustments</li>
+        <li>Predictive health warnings (e.g., HR anomalies)</li>
+        <li>Personalized coaching models trained on usage patterns</li>
+        <li>Context-aware insights based on lifestyle and trends</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY (multiple photos per watch) -->
+<section class="compare-section">
+  <div class="container">
+    <h2>4. Photo Comparison</h2>
+      <div class="photo-compare-grid">
+<!-- GW3 -->
+  <div class="photo-column">
+    <h3>Galaxy Watch 3</h3>
+    <div class="main-photo">
+    <img id="gw3-main" src="/assets/images/watch3-5-1.jpg" alt="Galaxy Watch 3 main photo">
+  </div>
+
+<div class="photo-thumbs">
+  <img src="/assets/images/watch3-5-2.jpg" data-target="gw3-main" alt="Galaxy Watch 3 product photo">
+  <img src="/assets/images/watch3-5-3.jpg" data-target="gw3-main" alt="Galaxy Watch 3 product photo">
+  <img src="/assets/images/watch3-5-4.jpg" data-target="gw3-main" alt="Galaxy Watch 3 product photo">
+  <img src="/assets/images/watch3-5-5.jpg" data-target="gw3-main" alt="Galaxy Watch 3 product photo">
+  <img src="/assets/images/watch3-5-6.jpg" data-target="gw3-main" alt="Galaxy Watch 3 product photo">
+</div>
+</div>
+
+<!-- GW8 -->
+<div class="photo-column">
+  <h3>Galaxy Watch 8 (AI-powered)</h3>
+    <div class="main-photo">
+      <img id="gw8-main" src="/assets/images/watch8-5-1.jpg" alt="Galaxy Watch 8 main">
+    </div>
+
+    <div class="photo-thumbs">
+      <img src="/assets/images/watch8-5-2.jpg" data-target="gw8-main" alt="Galaxy Watch 8 product photo">
+      <img src="/assets/images/watch8-5-3.jpg" data-target="gw8-main" alt="Galaxy Watch 8 product photo">
+      <img src="/assets/images/watch8-5-4.jpg" data-target="gw8-main" alt="Galaxy Watch 8 product photo">
+      <img src="/assets/images/watch8-5-5.jpg" data-target="gw8-main" alt="Galaxy Watch 8 product photo">
+      <img src="/assets/images/watch8-5-6.jpg" data-target="gw8-main" alt="Galaxy Watch 8 product photo">
+      </div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SUMMARY TABLE -->
+<section class="compare-section">
+  <div class="container">
+    <h2>5. Summary</h2>
+      <table class="table-compare">
+        <tr>
+          <th>Category</th>
+          <th>Winner</th>
+          <th>Reason</th>
+        </tr>
+        <tr>
+          <td>Health Tracking</td>
+          <td>Watch 8</td>
+          <td>AI-driven insights</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>Watch 8</td>
+          <td>Predictive analytics</td>
+        </tr>
+        <tr>
+          <td>Simplicity</td>
+          <td>Watch 3</td>
+          <td>Classic non-AI experience</td>
+        </tr>
+      </table>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta section">
+  <div class="container text-center">
+    <h2>Proceed to the Survey</h2>
+      <button class="btn primary" id="toSurveyCTA">Start Survey →</button>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container text-center muted">
+    © 2026 AI-powered vs Classic - Comparison 
+  </div>
+</footer>
+</div>
+</body>
+</html>

@@ -84,7 +84,11 @@ const pricingQs = [
 ];
 
 const demographicsQs = [
-  { text: "Age", type: "number" },
+  {
+    text: "Age",
+    type: "radio",
+    options: ["under 20", "20–29", "30–39", "40–49", "50–59", "60 and over"]
+  },
   {
     text: "Gender",
     type: "radio",

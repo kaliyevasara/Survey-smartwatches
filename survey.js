@@ -8,7 +8,7 @@ const FIREBASE_URL =
 const deviceUsageQs = [
   { text: "I currently own a smartwatch.", type: "yesno" },
   {
-    text: "If you do not own a smartwatch, please skip this question. I actively use health and fitness features on my smartwatch (e.g., step tracking, heart rate, sleep monitoring).",
+    text: "I actively use health and fitness features on my smartwatch (e.g., step tracking, heart rate, sleep monitoring).",
     type: "scale5"
   }
 ];
@@ -247,7 +247,6 @@ function renderPercent(containerId, name, question, options) {
   renderRadio(containerId, name, question, options);
 }
 
-
 // Render questions
 renderYesNo("deviceUsage", "deviceUsage1", deviceUsageQs[0].text);
 renderScale5(
@@ -259,12 +258,29 @@ renderScale5(
 );
 
 // Skip logic
+
 const ownRadios = document.getElementsByName("deviceUsage1");
 const healthRadios = document.getElementsByName("deviceUsage2");
-const healthContainer = healthRadios[0].closest("div");
+
+const healthContainer = healthRadios[0].closest(".question-group").querySelector("#deviceUsage").children[1];
 
 healthContainer.style.display = "none";
 healthRadios.forEach(r => (r.required = false));
+
+ownRadios.forEach(radio => {
+  radio.addEventListener("change", () => {
+    if (radio.value === "Yes") {
+      healthContainer.style.display = "block";
+      healthRadios.forEach(r => (r.required = true));
+    } else {
+      healthContainer.style.display = "none";
+      healthRadios.forEach(r => {
+        r.required = false;
+        r.checked = false;
+      });
+    }
+  });
+});
 
 ownRadios.forEach(radio => {
   radio.addEventListener("change", () => {

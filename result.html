@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Survey Results — Smartwatch AI vs Non-AI</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f6fa;
+    }
+
+    h1, h2 {
+      margin-top: 32px;
+    }
+
+    .topbar {
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      background: #111827;
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 320px !important;
+    }
+
+    .kpi {
+      font-size: 28px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="btn" href="./index.html">← Back to Main Page</a>
+  </div>
+
+  <h1>Consumer Willingness to Pay — AI vs Non-AI Smartwatch</h1>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Total Responses</h2>
+      <div id="totalResponses" class="kpi">—</div>
+    </div>
+
+    <div class="card">
+      <h2>Smartwatch Ownership</h2>
+      <canvas id="ownChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>Gender Distribution</h2>
+      <canvas id="genderChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>Age Distribution</h2>
+      <canvas id="ageChart"></canvas>
+    </div>
+  </div>
+
+  <h2>Perception Scores (Average)</h2>
+  <div class="grid">
+    <div class="card"><canvas id="watchCompareChart"></canvas></div>
+    <div class="card"><canvas id="wtpAttitudeChart"></canvas></div>
+  </div>
+
+  <h2>Willingness To Pay</h2>
+  <div class="grid">
+    <div class="card"><canvas id="extraPctChart"></canvas></div>
+    <div class="card"><canvas id="choiceChart"></canvas></div>
+  </div>
+
+  <h2>Prices (CZK)</h2>
+  <div class="grid">
+    <div class="card"><canvas id="priceChart"></canvas></div>
+  </div>
+
+  <h2>Influence Factors (Average)</h2>
+  <div class="grid">
+    <div class="card"><canvas id="factorsChart"></canvas></div>
+  </div>
+
+  <script src="result.js"></script>
+</body>
+</html>

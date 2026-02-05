@@ -11,6 +11,10 @@ document.getElementById("surveyBtn")?.addEventListener("click", () => {
   window.location.href = "./survey.html";
 });
 
+document.getElementById("resultBtn")?.addEventListener("click", () => {
+  window.location.href = "./result.html";
+});
+
 // CTA at bottom
 document.getElementById("toSurveyCTA")?.addEventListener("click", () => {
   window.location.href = "./survey.html";

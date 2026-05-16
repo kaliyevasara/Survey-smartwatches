@@ -43,7 +43,7 @@ body{
 .nav-btn:hover{ color:var(--accent); background:rgba(79,70,229,0.04); }
 
 .hero.section {
-  padding-top: 120px;
+  padding-top: 100px;
 }
 
 /* Section spacing */
